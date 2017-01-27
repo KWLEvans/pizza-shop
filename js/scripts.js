@@ -50,7 +50,8 @@ var Store = {
       new Topping("olives", "veggie", 2),
       new Topping("tomato", "veggie", 2),
       new Topping("pineapple", "veggie", 2),
-      new Topping("nutritional yeast", "veggie", 1)
+      new Topping("nutritional yeast", "veggie", 1),
+      new Topping("spinach", "veggie", 1)
     );
     console.log(this.toppingsAvailable);
     this.toppingsAvailable.forEach(function(topping) {
@@ -77,15 +78,16 @@ var Order = {
   pizzasArray: [],
   totalPrice: 0,
 
-  updatePizzas: function(pizza) {
+  addPizza: function(pizza) {
     this.pizzasArray.push(pizza);
     this.calculatePrice();
     console.log(this.totalPrice);
     appendPizzaToOrder(pizza);
   },
 
-  findPizza: function(clickedPizza) {
-    return this.pizzasArray[clickedPizza - 1];
+  removePizza: function(clickedPizza) {
+    return this.pizzasArray.splice(clickedPizza, 1);
+    this.calculatePrice();
   },
 
   calculatePrice: function() {
@@ -103,10 +105,6 @@ function appendNewTopping(topping) {
   );
 }
 
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 //Adding pizza to order div and updating total in order div
 function appendPizzaToOrder(pizza) {
   $("#order-display").append(
@@ -122,9 +120,23 @@ function updateOrderTotal() {
   $("#order-total").text("$" + Order.totalPrice);
 }
 
+//When a pizza is removed from the order, this repopulates the radio and checkboxes used to create it
+function populateFieldsForEdit(pizza) {
+  $("#sizes input[value='" + pizza.size + "']").prop("checked", true);
+  pizza.toppings.forEach(function(topping) {
+    $("#toppings input[value='" + topping.name + "']").prop("checked", true);
+  });
+}
+
 function clearFields() {
   $("#order-form input").prop("checked", false);
 }
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
 
 /////////////////////////////////////////////
 //Front-end
@@ -143,7 +155,23 @@ $(function() {
     }).get();
 
     var newPizza = new Pizza(pizzaSize, toppings);
-    Order.updatePizzas(newPizza);
+    Order.addPizza(newPizza);
     clearFields();
+  });
+
+  $("#edit-button").click(function() {
+    $(".order-summary").addClass("selectable");
+    $(".order-summary").click(function() {
+      var index = $(this).prevAll();
+      var pizza = Order.removePizza(index);
+
+      populateFieldsForEdit(pizza[0]);
+
+      $(this).remove();
+      if ($(".order-summary")) {
+        $(".order-summary").off();
+        $(".order-summary").removeClass("selectable");
+      }
+    });
   });
 });

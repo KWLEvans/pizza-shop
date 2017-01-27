@@ -39,9 +39,20 @@ strong {
   width: 100%;
 }
 
+img {
+  float: right;
+  height: 28px;
+  cursor: pointer;
+}
+
 .order-summary {
   border-bottom: 2px solid black;
   margin-bottom: 20px;
+}
+
+.selectable:hover {
+  background-color: lemonchiffon;
+  cursor: pointer;
 }
 
 #order-pizza-button, #check-out-button {
