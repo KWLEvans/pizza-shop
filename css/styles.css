@@ -1,11 +1,54 @@
+body {
+  background-color: #0a0a0a;
+}
+
+.jumbotron {
+  background-image: url("../img/pizza_universe.png");
+  background-size: cover;
+  color: white;
+  text-shadow: 3px 3px black;
+  margin-bottom: 0px;
+}
+
+.card {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.card-header {
+  background-color: #c9302c;
+}
+
 #sizes .custom-radio {
   display: inline-block;
+}
+
+.custom-control-description {
+  width: 100%;
+}
+
+em {
+  float: right;
+}
+
+strong {
+  margin-right: 40px;
 }
 
 .row label {
   width: 100%;
 }
 
-em {
-  margin-left: 40px;
+.order-summary {
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+}
+
+#order-pizza-button, #check-out-button {
+  width: 100%;
+  border: 2px solid black;
+}
+
+#check-out-button {
+  margin-bottom: -14px;
 }

@@ -2,6 +2,7 @@
 //Back-end
 /////////////////////////////////////////////
 
+//Base prices for each size of pizza
 var prices = {
   small: 6,
   medium: 10,
@@ -9,11 +10,13 @@ var prices = {
   pizzilla: 32,
 }
 
+//constructor for pizza object which contains the pizza size and array of its toppings objects
 function Pizza(size, toppingsArray) {
   this.size = size;
   this.toppings = toppingsArray;
 }
 
+//function which allows pizzas to calculate their price
 Pizza.prototype.price = function() {
   var price = prices[this.size];
   this.toppings.forEach(function(topping) {
@@ -22,21 +25,14 @@ Pizza.prototype.price = function() {
   return price;
 }
 
-Pizza.prototype.addTopping = function(topping) {
-  this.toppings.push(topping);
-}
-
+//Topping constructor containing topping name, variety (meat or veggie for placing in the DOM), and cost
 function Topping(name, type, cost) {
   this.name = name;
   this.type = type;
   this.cost = cost;
 }
 
-Topping.prototype.priceLookup = function() {
-  var price = prices[this.type];
-  return price;
-}
-
+//Store object which initializes available toppings objects and stores them in an array
 var Store = {
   toppingsAvailable: [],
 
@@ -62,6 +58,7 @@ var Store = {
     });
   },
 
+  //Method to find a topping by name within the toppingsAvailable array
   findTopping: function(toppingToFind) {
     console.log("finding topping " + toppingToFind);
     var desiredTopping;
@@ -75,6 +72,31 @@ var Store = {
   }
 }
 
+//Order object which tracks all pizza objects created and allows for calculating total order price
+var Order = {
+  pizzasArray: [],
+  totalPrice: 0,
+
+  updatePizzas: function(pizza) {
+    this.pizzasArray.push(pizza);
+    this.calculatePrice();
+    console.log(this.totalPrice);
+    appendPizzaToOrder(pizza);
+  },
+
+  findPizza: function(clickedPizza) {
+    return this.pizzasArray[clickedPizza - 1];
+  },
+
+  calculatePrice: function() {
+    this.totalPrice = 0;
+    this.pizzasArray.forEach(function(pizza) {
+      Order.totalPrice += pizza.price();
+    });
+  }
+}
+
+//Function for appending new toppings to the DOM toppings list
 function appendNewTopping(topping) {
   $("#" + topping.type).append(
     "<label class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' value='" + topping.name + "'><span class='custom-control-indicator'></span><span class='custom-control-description'>" + capitalize(topping.name) + "<em class='text-right'>$" + topping.cost + "</em></span></label>"
@@ -85,18 +107,23 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function stringifyToppingsArray(toppingsArray) {
-  var toppingsString = "";
-  for (i = 0; i < toppingsArray.length; i++) {
-    if (i === 0) {
-      toppingsString += toppingsArray[i].name;
-    } else if (i === toppingsArray.length - 1) {
-      toppingsString += ", and " + toppingsArray[i].name;
-    } else {
-      toppingsString += ", " + toppingsArray[i].name;
-    }
-  }
-  return toppingsString;
+//Adding pizza to order div and updating total in order div
+function appendPizzaToOrder(pizza) {
+  $("#order-display").append(
+    "<div class='order-summary'><h5>" + capitalize(pizza.size) + " Pizza<em>$" + prices[pizza.size] + "</em></h5><ul></ul></div>"
+  );
+  pizza.toppings.forEach(function(topping) {
+    $(".order-summary:last-of-type ul").append("<li>" + topping.name + "<em>$" + topping.cost + "</em></li>")
+  });
+  updateOrderTotal();
+}
+
+function updateOrderTotal() {
+  $("#order-total").text("$" + Order.totalPrice);
+}
+
+function clearFields() {
+  $("#order-form input").prop("checked", false);
 }
 
 /////////////////////////////////////////////
@@ -107,18 +134,16 @@ $(function() {
   Store.open();
 
 
-  $("#order-form").submit(function(event) {
+  $("#order-pizza-button").click(function(event) {
     event.preventDefault();
 
     var pizzaSize = $("#sizes input[type=radio]:checked").val();
     var toppings = $("#toppings input[type=checkbox]:checked").map(function() {
       return Store.findTopping($(this).val());
     }).get();
-    console.log(toppings);
 
     var newPizza = new Pizza(pizzaSize, toppings);
-    console.log(newPizza);
-
-    $("#order-display").text("Yous gotta " + newPizza.size + " pizza with " + stringifyToppingsArray(newPizza.toppings) + "! And it'll cost you $" + newPizza.price() + ".");
+    Order.updatePizzas(newPizza);
+    clearFields();
   });
 });

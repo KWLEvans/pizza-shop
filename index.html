@@ -23,22 +23,22 @@
             <label class="custom-control custom-radio">
               <input name="size" type="radio" class="custom-control-input" value="small">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Small</span>
+              <span class="custom-control-description">Small<em><strong>10"</strong>$6</em></span>
             </label>
             <label class="custom-control custom-radio">
               <input name="size" type="radio" class="custom-control-input" value="medium">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Medium</span>
+              <span class="custom-control-description">Medium<em><strong>14"</strong>$10</em></span>
             </label>
             <label class="custom-control custom-radio">
               <input name="size" type="radio" class="custom-control-input" value="large">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Large</span>
+              <span class="custom-control-description">Large<em><strong>10"</strong>$14</em></span>
             </label>
             <label class="custom-control custom-radio">
               <input name="size" type="radio" class="custom-control-input" value="pizzilla">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">The Pizzilla</span>
+              <span class="custom-control-description">The Pizzilla<em><strong>10"</strong>$32</em></span>
             </label>
           </div>
         </div>
@@ -52,12 +52,14 @@
             <div id="veggie" class="custom-controls-stacked card-block"></div>
           </div>
         </div>
+        <button id="order-pizza-button" class="btn" type="submit">Add to order</button>
+        <button id="check-out-button" class="btn">Check out</button>
       </form>
       <div class="col col-4 card">
         <h3 class="card-header">Your order</h3>
         <div id="order-display" class="card-block"></div>
+        <div class="card-footer"><h3>Total:<em id="order-total"></em></h3></div>
       </div>
-      <button id="order-pizza" type="submit">Pizza me!</button>
     </div>
   </body>
 </html>
