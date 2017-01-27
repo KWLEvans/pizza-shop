@@ -25,7 +25,10 @@ _This is a site where users can construct pizzas from different topping options.
 * The program will provide different prices for different sizes of pizza.
   * **Example Input:**
   * **Example Output:**
-* The program will allow users to pick toppings for their pizza and will price them accordingly.
+* The program will allow users to pick toppings for their pizza.
+  * **Example Input:**
+  * **Example Output:**
+* The program will provide a price based on pizza size and toppings.
   * **Example Input:**
   * **Example Output:**
 * The program will print the user's order to the screen including a price.

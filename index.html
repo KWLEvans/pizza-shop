@@ -12,15 +12,34 @@
     <div class="container">
       <form id="order-form" class="form-group">
         <div id="sizes">
-          <input type="radio" name="size" value="small">Small
-          <input type="radio" name="size" value="medium">Medium
-          <input type="radio" name="size" value="large">Large
-          <input type="radio" name="size" value="pizzilla">The Pizzilla
+          <label class="custom-control custom-radio">
+            <input name="size" type="radio" class="custom-control-input" value="small">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Small</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input name="size" type="radio" class="custom-control-input" value="medium">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Medium</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input name="size" type="radio" class="custom-control-input" value="large">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Large</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input name="size" type="radio" class="custom-control-input" value="pizzilla">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">The Pizzilla</span>
+          </label>
+        </div>
+        <div id="toppings" class="row">
+          <div id="meat" class="col-xs-4 custom-controls-stacked"></div>
+          <div id="veggie" class="col-xs-4 custom-controls-stacked"></div>
+          <div id="order-display" class="col-xs-4"></div>
         </div>
         <button id="order-pizza" type="submit">Pizza me!</button>
       </form>
-      <div id="order-display"></div>
-
     </div>
   </body>
 </html>
