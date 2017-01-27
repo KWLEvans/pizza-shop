@@ -1,0 +1,11 @@
+#sizes .custom-radio {
+  display: inline-block;
+}
+
+.row label {
+  width: 100%;
+}
+
+em {
+  margin-left: 40px;
+}

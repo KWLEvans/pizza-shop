@@ -9,37 +9,55 @@
     <title>You Wanna Pizza Me?</title>
   </head>
   <body>
-    <div class="container">
-      <form id="order-form" class="form-group">
-        <div id="sizes">
-          <label class="custom-control custom-radio">
-            <input name="size" type="radio" class="custom-control-input" value="small">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Small</span>
-          </label>
-          <label class="custom-control custom-radio">
-            <input name="size" type="radio" class="custom-control-input" value="medium">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Medium</span>
-          </label>
-          <label class="custom-control custom-radio">
-            <input name="size" type="radio" class="custom-control-input" value="large">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Large</span>
-          </label>
-          <label class="custom-control custom-radio">
-            <input name="size" type="radio" class="custom-control-input" value="pizzilla">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">The Pizzilla</span>
-          </label>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-3">You Wanna Pizza Me?</h1>
+        <p class="lead">It's pie time you ordered some 'zza!!</p>
+      </div>
+    </div>
+    <div class="container-fluid row no-gutters">
+      <form id="order-form" class="form-group col col-8">
+        <div id="sizes" class="card">
+          <h3 class="card-header">Sizes</h3>
+          <div class="card-block">
+            <label class="custom-control custom-radio">
+              <input name="size" type="radio" class="custom-control-input" value="small">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Small</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input name="size" type="radio" class="custom-control-input" value="medium">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Medium</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input name="size" type="radio" class="custom-control-input" value="large">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Large</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input name="size" type="radio" class="custom-control-input" value="pizzilla">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">The Pizzilla</span>
+            </label>
+          </div>
         </div>
-        <div id="toppings" class="row">
-          <div id="meat" class="col-xs-4 custom-controls-stacked"></div>
-          <div id="veggie" class="col-xs-4 custom-controls-stacked"></div>
-          <div id="order-display" class="col-xs-4"></div>
+        <div id="toppings" class="row no-gutters">
+          <div class="col col-xs-6 card">
+            <h3 class="card-header">Meats</h3>
+            <div id="meat" class="custom-controls-stacked card-block"></div>
+          </div>
+          <div class="col col-xs-6 card">
+            <h3 class="card-header">Veggies</h3>
+            <div id="veggie" class="custom-controls-stacked card-block"></div>
+          </div>
         </div>
-        <button id="order-pizza" type="submit">Pizza me!</button>
       </form>
+      <div class="col col-4 card">
+        <h3 class="card-header">Your order</h3>
+        <div id="order-display" class="card-block"></div>
+      </div>
+      <button id="order-pizza" type="submit">Pizza me!</button>
     </div>
   </body>
 </html>

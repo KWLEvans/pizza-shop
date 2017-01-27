@@ -47,15 +47,19 @@ var Store = {
       new Topping("sausage", "meat", 2),
       new Topping("bacon", "meat", 3),
       new Topping("chicken", "meat", 3),
+      new Topping("prosciutto crudo", "meat", 5),
       new Topping("tempeh", "meat", 4),
       new Topping("onion", "veggie", 2),
       new Topping("green peppers", "veggie", 2),
       new Topping("olives", "veggie", 2),
       new Topping("tomato", "veggie", 2),
-      new Topping("pineapple", "veggie", 2)
+      new Topping("pineapple", "veggie", 2),
+      new Topping("nutritional yeast", "veggie", 1)
     );
     console.log(this.toppingsAvailable);
-    populateOptions(this.toppingsAvailable);
+    this.toppingsAvailable.forEach(function(topping) {
+      appendNewTopping(topping);
+    });
   },
 
   findTopping: function(toppingToFind) {
@@ -71,12 +75,10 @@ var Store = {
   }
 }
 
-function populateOptions(toppingsAvailable) {
-  toppingsAvailable.forEach(function(topping) {
-    $("#" + topping.type).append(
-      "<label class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' value='" + topping.name + "'><span class='custom-control-indicator'></span><span class='custom-control-description'>" + capitalize(topping.name) + "</span></label>"
-    );
-  });
+function appendNewTopping(topping) {
+  $("#" + topping.type).append(
+    "<label class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' value='" + topping.name + "'><span class='custom-control-indicator'></span><span class='custom-control-description'>" + capitalize(topping.name) + "<em class='text-right'>$" + topping.cost + "</em></span></label>"
+  );
 }
 
 function capitalize(string) {
