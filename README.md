@@ -12,7 +12,7 @@ _This is a site where users can construct pizzas from different topping options.
 
 * _Clone GitHub repository_
 * _Open index.html in any web browser_
-* _Enjoy!_
+* _Or you can find the page online [here](https://kwlevans.github.io/pizza-shop/)_
 
 ## Application Specs
 
