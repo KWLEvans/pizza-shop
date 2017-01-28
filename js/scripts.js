@@ -150,13 +150,17 @@ $(function() {
     event.preventDefault();
 
     var pizzaSize = $("#sizes input[type=radio]:checked").val();
-    var toppings = $("#toppings input[type=checkbox]:checked").map(function() {
-      return Store.findTopping($(this).val());
-    }).get();
+    if (!pizzaSize) {
+      alert("Please choose a pizza size.")
+    } else {
+      var toppings = $("#toppings input[type=checkbox]:checked").map(function() {
+        return Store.findTopping($(this).val());
+      }).get();
 
-    var newPizza = new Pizza(pizzaSize, toppings);
-    Order.addPizza(newPizza);
-    clearFields();
+      var newPizza = new Pizza(pizzaSize, toppings);
+      Order.addPizza(newPizza);
+      clearFields();
+    }
   });
 
   $("#edit-button").click(function() {
@@ -166,12 +170,44 @@ $(function() {
       var pizza = Order.removePizza(index);
 
       populateFieldsForEdit(pizza[0]);
-
+      $("#order-total").text("$0");
       $(this).remove();
       if ($(".order-summary")) {
         $(".order-summary").off();
         $(".order-summary").removeClass("selectable");
       }
+    });
+  });
+
+  $("#check-out-button").click(function(event) {
+    event.preventDefault();
+
+    $("#order-display, #edit-button").hide();
+    $("#pick-up-delivery-display, #back-button").show();
+  });
+
+  $("#back-button").click(function(event) {
+    event.preventDefault();
+
+    $("#order-display, #edit-button").show();
+    $("#pick-up-delivery-display, #back-button").hide();
+  });
+
+  $("#pick-up-div").click(function() {
+    $(this).html("<h3 id='pick-up-sign-off'>See you soon!</h3>");
+    $("#delivery-div").hide();
+  });
+
+  $("#delivery-div").click(function() {
+    $("#pick-up-div").hide();
+    $("#delivery-address").show();
+    $(this).html("<h3 id='delivery-button'>Deliver!</h3>");
+    $(this).prop("id", "buttonify-delivery");
+
+    $("#buttonify-delivery").click(function() {
+      $("#delivery-address").hide();
+      $(this).hide();
+      $("#pick-up-delivery-display").html("<h3 id='delivery-sign-off'>Your pizza is being prepared and will be delivered soon!</h3><img id='pizza-gif' src='img/pizza.gif'>");
     });
   });
 });

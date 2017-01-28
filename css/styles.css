@@ -39,7 +39,7 @@ strong {
   width: 100%;
 }
 
-img {
+.card-header img {
   float: right;
   height: 28px;
   cursor: pointer;
@@ -62,4 +62,59 @@ img {
 
 #check-out-button {
   margin-bottom: -14px;
+}
+
+#back-button, #pick-up-delivery-display, #delivery-address {
+  display: none;
+}
+
+#pick-up-div, #delivery-div {
+  height: 200px;
+  border: 2px solid lightgrey;
+  margin-bottom: 30px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+#pick-up-delivery-display h4.card-header {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  margin: -1px;
+}
+
+#delivery-image, #pick-up-image {
+  height: 130px;
+  margin-top: 10px;
+}
+
+#delivery-image {
+  margin-left: 32%;
+}
+
+#pick-up-image {
+  margin-left: 21%;
+}
+
+#pick-up-sign-off {
+  padding-top: 20%;
+  width: 100%;
+  text-align: center;
+}
+
+#delivery-button {
+  padding-top: 65px;
+  text-align: center;
+  color: white;
+}
+
+#buttonify-delivery {
+  background-color: #c9302c;
+  height: 150px;
+  border-radius: 20px;
+}
+
+#pizza-gif {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20%;
 }
